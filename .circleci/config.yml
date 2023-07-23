@@ -58,3 +58,4 @@ workflows:
                 - dev
                 - stage
                 - master
+                - main
