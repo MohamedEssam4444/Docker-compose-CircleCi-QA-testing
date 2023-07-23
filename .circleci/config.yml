@@ -19,6 +19,7 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker
 
       #Clone the Playwright tests repository to a different directory within the workspace
       - run:
@@ -30,9 +31,9 @@ jobs:
           command: |
             docker build .
             docker run -d -p 3000:3000 --name react-app react-app:latest
-            sleep 100
+            sleep
             curl http://localhost:3000
-            
+
       # Use Docker-Compose to run both services together
       - run:
           name: Run React app and Playwright tests
