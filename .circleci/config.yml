@@ -10,34 +10,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      # - run: 
-      #     name: clone playwright repo
-      #     command: git clone https://github.com/microsoft/playwright.git
-      # Build the React app Docker image
-
-      # - run:
-      #     name: Build React app Docker image
-      #     command: docker build -t react-app:latest .
-
-      # # Start the React app container
-      # - run:
-      #     name: Run React app
-      #     command: docker run -d -p 3000:3000 --name react-app-container react-app:latest
-
-      # Wait for the React app to start (Adjust sleep time as needed)
-      # - run:
-      #     name: Wait for React app to start
-      #     command: sleep 10
 
       #Clone the Playwright tests repository to a different directory within the workspace
-      # - run:
-      #     name: Clone Playwright tests repository
-      #     command: git clone https://github.com/MohamedEssam4444/docker-compose-QA-testing.git
-
-      # # Build the Playwright tests Docker image
-      # - run:
-      #     name: Build Playwright tests Docker image
-      #     command: docker build -t playwright-tests playwright-tests
+      - run:
+          name: Clone Playwright tests repository
+          command: git clone https://github.com/MohamedEssam4444/docker-compose-QA-testing.git
 
       # Use Docker-Compose to run both services together
       - run:
@@ -49,6 +26,7 @@ jobs:
       - run:
           name: install playwright
           command: |
+            cd docker-compose-QA-testing
             npm uninstall playwright
             npm install -D @playwright/test
             npx playwright install
