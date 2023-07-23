@@ -32,7 +32,7 @@ jobs:
             docker build .
             docker ps
             docker run -d -p 3000:3000 --name react-app react-app
-            sleep
+            sleep 100
             curl http://localhost:3000
 
       # Use Docker-Compose to run both services together
