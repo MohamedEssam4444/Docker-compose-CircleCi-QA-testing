@@ -5,3 +5,18 @@ services:
     build: .
     ports:
       - "3000:3000"
+    networks:
+      - react-playwright-network
+
+  playwright-tests:
+    image: mcr.microsoft.com/playwright:v1.36.0-jammy
+    depends_on:
+      - react-app
+    # environment:
+    #   - REACT_APP_SERVER_URL=http://react-app:3000  # URL for the React app within the Docker network
+    networks:
+      - react-playwright-network
+
+networks:
+  react-playwright-network:
+    driver: bridge

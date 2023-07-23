@@ -4,49 +4,28 @@ jobs:
     docker:
       - image: circleci/node:14
         environment:
-          - CI: true
+          CI: true
     steps:
       - checkout
       - setup_remote_docker
-
-      # Build the React app Docker image
-      - run:
-          name: Build React app Docker image
-          command: docker build -t react-app:latest .
-
-      # Start the React app container
-      - run:
-          name: Run React app
-          command: docker run -d -p 3000:3000 --name react-app-container react-app:latest
-
-      # Wait for the React app to start (Adjust sleep time as needed)
-      - run:
-          name: Wait for React app to start
-          command: sleep 10
-
-      # Clone the Playwright tests repository to a different directory within the workspace
-      - run:
-          name: Clone Playwright tests repository
-          command: git clone https://github.com/sftqa/pw_repo playwright-tests
-
-      # Build the Playwright tests Docker image
-      - run:
-          name: Build Playwright tests Docker image
-          command: docker build -t playwright-tests playwright-tests
 
       # Use Docker-Compose to run both services together
       - run:
           name: Run React app and Playwright tests
           command: |
-            cd playwright-tests           # Change the working directory to the cloned Playwright tests repository
-            docker-compose up --abort-on-container-exit
+            docker-compose up
+
+      - run: 
+          name: run your tests buddy
+          command: |
+            echo "please your your tests in this stage"
+            docker ps
 
       # Clean up containers after the tests complete
       - run:
           name: Cleanup
           command: |
-            docker stop react-app-container
-            docker rm react-app-container
+            docker compose down
 
 # Define workflows
 workflows:

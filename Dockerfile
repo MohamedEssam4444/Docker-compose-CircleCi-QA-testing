@@ -10,4 +10,5 @@ RUN npm run build
 FROM node:14
 WORKDIR /app
 COPY --from=react-builder /app/build ./build
+EXPOSE 3000
 CMD ["npm", "start"]
