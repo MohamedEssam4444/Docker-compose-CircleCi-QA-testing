@@ -15,7 +15,7 @@ jobs:
       - image: circleci/node:14
         environment:
           CI: true
-          REACT_APP_SERVER_URL: http://react-app:3000
+          # REACT_APP_SERVER_URL: http://react-app:3000
 
     steps:
       - checkout
@@ -35,8 +35,7 @@ jobs:
             npm uninstall playwright
             npm install -D @playwright/test
             npx playwright install
-            echo ${REACT_APP_SERVER_URL}
-            curl ${REACT_APP_SERVER_URL}
+            sleep 60
             curl localhost:3000
             npx playwright test
 
