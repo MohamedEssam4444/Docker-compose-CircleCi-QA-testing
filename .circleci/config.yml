@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Cleanup
           command: |
-            docker compose down
+            docker-compose down
 
 # Define workflows
 workflows:
