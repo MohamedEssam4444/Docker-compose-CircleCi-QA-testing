@@ -47,6 +47,13 @@ jobs:
             docker-compose up -d
 
       - run:
+          name: install playwright
+          command: |
+            npm uninstall playwright
+            npm install -D @playwright/test
+            npx playwright install
+
+      - run:
           name: run npx pw tests
           command: |
             echo ${REACT_APP_SERVER_URL}
