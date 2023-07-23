@@ -56,6 +56,7 @@ jobs:
       - run:
           name: run npx pw tests
           command: |
+            cd docker-compose-QA-testing
             echo ${REACT_APP_SERVER_URL}
             npx playwright test
 
