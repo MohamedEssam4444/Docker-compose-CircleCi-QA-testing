@@ -1,5 +1,15 @@
 version: 2.1
 jobs:
+  build_all:
+    docker:
+      - image: circleci/node:14
+
+    steps:
+      - checkout
+      - run:
+          name: test
+          command: echo "test"
+
   build:
     docker:
       - image: circleci/node:14
@@ -21,23 +31,12 @@ jobs:
           name: Run React app and Playwright tests
           command: |
             cd docker-compose-QA-testing
-            docker-compose up -d
-
-      - run:
-          name: install playwright
-          command: |
-            cd docker-compose-QA-testing
+            docker-compose up
             npm uninstall playwright
             npm install -D @playwright/test
             npx playwright install
-
-      - run:
-          name: run npx pw tests
-          command: |
-            cd docker-compose-QA-testing
             echo ${REACT_APP_SERVER_URL}
-            npx playwright test
-
+            npx playwright test --report=html
 
       # Clean up containers after the tests complete
       - run:
@@ -50,4 +49,12 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build_all
+
+      - build:
+          filters:
+            branches:
+              only:
+                - dev
+                - stage
+                - master
