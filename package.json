@@ -1,7 +1,8 @@
 {
-  "name": "sample-react-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "docker-compose-circleci-qa-testing",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -12,27 +13,22 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "test-pw": "playwright test --browser=all",
+    "test-html-report": "playwright test --browser=all --reporter=html",
+    "test-json-report": "PLAYWRIGHT_JSON_OUTPUT_NAME=results.json playwright test --browser=chromium --reporter=json",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohamedEssam4444/Docker-compose-CircleCi-QA-testing.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohamedEssam4444/Docker-compose-CircleCi-QA-testing/issues"
+  },
+  "homepage": "https://github.com/MohamedEssam4444/Docker-compose-CircleCi-QA-testing#readme"
 }
