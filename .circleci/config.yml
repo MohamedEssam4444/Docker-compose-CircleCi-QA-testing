@@ -19,7 +19,6 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker
 
       #Clone the Playwright tests repository to a different directory within the workspace
       - run:
