@@ -30,7 +30,8 @@ jobs:
           name: Run React app
           command: |
             docker build .
-            docker run -d -p 3000:3000 --name react-app react-app:latest
+            docker ps
+            docker run -d -p 3000:3000 --name react-app react-app
             sleep
             curl http://localhost:3000
 
