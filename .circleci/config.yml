@@ -31,7 +31,7 @@ jobs:
           command: |
             docker build .
             docker ps
-            docker run -d -p 3000:3000 --name react-app react-app
+            docker run -d -p 3000:3000 --name react-app circleci/node:14
             sleep 100
             curl http://localhost:3000
 
