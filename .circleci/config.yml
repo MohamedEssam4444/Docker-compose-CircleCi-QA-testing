@@ -8,18 +8,21 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+
+      # Build the React app Docker image
       - run:
           name: Build React app Docker image
           command: docker build -t react-app:latest .
+
+      # Use Docker-Compose to run both services together
       - run:
-          name: Run React app container
-          command: docker run -d -p 3000:3000 --name react-app-container react-app:latest
-      - run:
-          name: Run React app tests
-          command: npm test
+          name: Run React app and Playwright tests
+          command: |
+            docker-compose -f ../pw_repo/docker-compose.yml up --abort-on-container-exit
+
       - run:
           name: Cleanup
-          command: docker stop react-app-container && docker rm react-app-container
+          command: docker-compose -f ../pw_repo/docker-compose.yml down
 
 workflows:
   version: 2
