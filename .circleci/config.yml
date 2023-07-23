@@ -36,7 +36,9 @@ jobs:
             npm install -D @playwright/test
             npx playwright install
             echo ${REACT_APP_SERVER_URL}
-            npx playwright test --reporter=html
+            curl ${REACT_APP_SERVER_URL}
+            curl localhost:3000
+            npx playwright test
 
       # Clean up containers after the tests complete
       - run:
