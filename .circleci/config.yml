@@ -46,7 +46,7 @@ jobs:
             docker-compose up -d
             sleep 100
             docker ps
-            docker inspect react-app
+            curl http://localhost:3000
             npm uninstall playwright
             npm install -D @playwright/test
             npx playwright install
