@@ -30,8 +30,8 @@ jobs:
           name: Run React app
           command: |
             docker build .
-            docker ps
             docker run -d -p 3000:3000 --name react-app circleci/node:14
+            docker ps
             sleep 100
             docker inspect react-app | grep IPAddress
             docker inspect react-app | grep IPAddress | cut -d ':' -f2 | sed 's/"//g' | sed 's/,//g'
