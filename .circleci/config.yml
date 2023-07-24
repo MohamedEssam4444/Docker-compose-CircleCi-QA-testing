@@ -42,6 +42,13 @@ jobs:
             cd docker-compose-QA-testing
             docker-compose up -d
             docker-compose run playwright-tests npx -y playwright test
+            npx playwright show-report
+            
+      - store_test_results:
+          path: ./outcome/test-results/results.xml
+
+      - store_artifacts:
+          path: ./outcome/html
 
       # Clean up containers after the tests complete
       - run:
