@@ -33,7 +33,10 @@ jobs:
             docker ps
             docker run -d -p 3000:3000 --name react-app circleci/node:14
             sleep 100
-            curl http://localhost:3000
+            docker inspect react-app | grep IPAddress
+            docker inspect react-app | grep IPAddress | cut -d ':' -f2 | sed 's/"//g' | sed 's/,//g'
+            IP=$(docker inspect react-app | grep IPAddress | cut -d ':' -f2 | sed 's/"//g' | sed 's/,//g')
+            curl http://$IP:3000
 
       # Use Docker-Compose to run both services together
       - run:
@@ -41,6 +44,9 @@ jobs:
           command: |
             cd docker-compose-QA-testing
             docker-compose up -d
+            sleep 100
+            docker ps
+            docker inspect react-app
             npm uninstall playwright
             npm install -D @playwright/test
             npx playwright install
