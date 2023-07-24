@@ -25,22 +25,13 @@ jobs:
           name: Clone Playwright tests repository
           command: git clone https://github.com/MohamedEssam4444/docker-compose-QA-testing.git
 
-      # - run:
-      #     name: Run React app
-      #     command: |
-      #       docker build . -t react-app
-      #       docker run -d -p 3000:3000 --name react-app react-app
-      #       sleep 100
-      #       docker ps
-      #       curl http://react-app:3000
-
       # Use Docker-Compose to run both services together
       - run:
           name: Run React app and Playwright tests
           command: |
             cd docker-compose-QA-testing
             docker-compose up -d
-            docker-compose run playwright-tests npx -y playwright test &&  npx -y playwright show-report
+            docker-compose run playwright-tests npx -y playwright test && npx -y playwright show-report
 
       - store_test_results:
           path: ./outcome/test-results/results.xml
