@@ -41,9 +41,8 @@ jobs:
           command: |
             cd docker-compose-QA-testing
             docker-compose up -d
-            sleep 60
             docker ps
-            docker exec playwright-tests npx playwright test
+            docker-compose run playwright-tests npx playwright test
 
       # Clean up containers after the tests complete
       - run:
