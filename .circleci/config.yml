@@ -41,15 +41,13 @@ jobs:
           command: |
             cd docker-compose-QA-testing
             docker-compose up -d
-            docker ps
-            docker-compose run playwright-tests npx playwright test
+            docker-compose run playwright-tests npx -y playwright test
 
       # Clean up containers after the tests complete
       - run:
           name: Cleanup
           command: |
             docker-compose down
-
 
 # Define workflows
 workflows:
