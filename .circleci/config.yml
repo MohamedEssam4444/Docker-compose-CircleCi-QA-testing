@@ -15,7 +15,7 @@ jobs:
       - image: circleci/node:14
         environment:
           CI: true
-          # REACT_APP_SERVER_URL: http://react-app:3000
+          REACT_APP_SERVER_URL: http://react-app:3000
 
     steps:
       - checkout
@@ -29,8 +29,8 @@ jobs:
       - run:
           name: Run React app
           command: |
-            docker build .
-            docker run -d -p 3000:3000 --name react-app circleci/node:14
+            docker build . -t react-app
+            docker run -p 3000:3000 --name react-app react-app
             sleep 100
             docker ps
             curl http://react-app:3000
