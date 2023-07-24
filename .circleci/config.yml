@@ -42,8 +42,8 @@ jobs:
             cd docker-compose-QA-testing
             docker-compose up -d
             docker-compose run playwright-tests npx -y playwright test
-            npx playwright show-report
-            
+            docker-compose run playwright-tests npx -y playwright show-report
+
       - store_test_results:
           path: ./outcome/test-results/results.xml
 
