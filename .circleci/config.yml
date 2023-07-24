@@ -26,18 +26,6 @@ jobs:
           name: Clone Playwright tests repository
           command: git clone https://github.com/MohamedEssam4444/docker-compose-QA-testing.git
 
-      - run:
-          name: Run React app
-          command: |
-            docker build .
-            docker run -d -p 3000:3000 --name react-app circleci/node:14
-            sleep 100
-            docker ps
-            docker inspect react-app | grep IPAddress
-            docker inspect react-app | grep IPAddress | cut -d ':' -f2 | sed 's/"//g' | sed 's/,//g'
-            IP=$(docker inspect react-app | grep IPAddress | cut -d ':' -f2 | sed 's/"//g' | sed 's/,//g')
-            curl http://$IP:3000
-
       # Use Docker-Compose to run both services together
       - run:
           name: Run React app and Playwright tests
