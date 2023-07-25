@@ -46,6 +46,7 @@ jobs:
             docker-compose down
 
 # Define workflows
+
 workflows:
   version: 2
   build_and_test:
