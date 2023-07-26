@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   build_all:
     docker:
@@ -16,6 +17,7 @@ jobs:
           CI: true
           REACT_APP_SERVER_URL: http://react-app:3000
 
+
     steps:
       - checkout
       - setup_remote_docker
@@ -29,6 +31,7 @@ jobs:
       - run:
           name: Run React app and Playwright tests
           command: |
+            echo ${GITHUB_TOKEN}
             cd docker-compose-QA-testing
             docker-compose up -d
             docker-compose run playwright-tests npx -y playwright test
