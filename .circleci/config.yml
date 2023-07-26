@@ -33,7 +33,7 @@ jobs:
           command: |
             echo ${GITHUB_TOKEN}
             cd docker-compose-QA-testing
-            docker-compose up -d
+            docker-compose up
             docker-compose run playwright-tests npx -y playwright test
 
       - store_test_results:
